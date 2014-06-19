@@ -12,9 +12,10 @@ class Spark {
 
         $min = min($data);
         $max = max($data);
+        $range = abs($max - $min);
 
-        return array_reduce($data, function($carry, $item) use ($min, $max, $steps) {
-            $pos = (int)round((($item - $min) / $max) * 8);
+        return array_reduce($data, function($carry, $item) use ($min, $range, $steps) {
+            $pos = (int)round((($item - $min) / $range) * 7);
             return $carry . $steps[$pos];
         }, '');
     }
